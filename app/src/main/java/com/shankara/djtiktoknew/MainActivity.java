@@ -46,6 +46,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -83,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         Appodeal.disableLocationPermissionCheck();
         Appodeal.setTesting(true);
         initializeViews();
-        getSongListMain();
         Appodeal.isLoaded(Appodeal.INTERSTITIAL);
 
         songList = new ArrayList<>();
@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         pushShare();
         pushInfo();
         initDrawer();
+        getSongListMain();
     }
 
     public static Intent getIntent(Context context, boolean consent) {
@@ -281,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
