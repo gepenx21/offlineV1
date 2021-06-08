@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         pushShare();
         pushInfo();
         initDrawer();
-        getSongListMain();
+        getSongListMain(); //iki penyakite
     }
 
     public static Intent getIntent(Context context, boolean consent) {
