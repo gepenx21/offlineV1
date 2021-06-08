@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/rv_bg"
+    >
+
+    <FrameLayout
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/background_toolbar"
+        android:layout_above="@id/adView"
+        />
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/no_conn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:visibility="gone">-->
+<!--        <TextView-->
+<!--            android:textSize="16sp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="There is no internet connection"-->
+<!--            />-->
+<!--        <Button-->
+<!--            android:id="@+id/btn_reload"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="40dp"-->
+<!--            style="@style/Widget.AppCompat.Button.Colored"-->
+<!--            android:text="try again"-->
+<!--            android:layout_marginTop="5dp"/>-->
+<!--    </LinearLayout>-->
+
+
+    <include
+        android:id="@+id/player_layout"
+        layout="@layout/player_layout" />
+
+    <include
+        android:id="@+id/drawer_nav"
+        layout="@layout/drawer_nav" />
+
+    <LinearLayout
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        />
+    <com.appodeal.ads.BannerView
+        android:id="@+id/appodealBannerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+</RelativeLayout>

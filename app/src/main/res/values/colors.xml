@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8d9093</color>
+    <color name="colorPrimaryDark">#3b3938</color>
+    <color name="colorAccent">#03A9F4</color>
+    <color name="background_toolbar">#23282b</color>
+    <color name="background_selected_item">#03A9F4</color>
+    <color name="text_player">#3F51B5</color>
+    <color name="black">#011B16</color>
+    <color name="dark_black">#131313</color>
+    <color name="trans">#6601579B</color>
+    <color name="rv_trans">#B3FDFDFD</color>
+    <color name="card_color">#E6999999</color>
+</resources>

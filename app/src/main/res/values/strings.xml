@@ -1,0 +1,24 @@
+<resources>
+    <string name="drawer_home">Home</string>
+    <string name="drawer_share">Share This</string>
+    <string name="drawer_rate">Rate App</string>
+    <string name="drawer_more">More Apps</string>
+
+    <string name="AUTHOR">Shankara</string>
+    <string name="PUBLISHER_EMAIL">Entertainment</string>
+    <string name="MORE_APP">https://play.google.com/store/apps/developer?id=Shankara+Entertainment</string>
+
+    <string name="app_name">Dj Tik Tok New</string>
+    <string name="dev_name">Ndog Kuwuk Dev</string>
+    <string name="click_song">Silakan pilih lagu di atas</string>
+    <string name="duration">00:00</string>
+    <string name="app_id">054116ee924a2628760e6522f4a6f523134b6dd1fe637cc7</string>
+    <string name="splash_bottom">Developed by Ndog Kuwuk Dev</string>
+
+    <string name="share">Hi Mate, Try this Mate</string>
+    <string name="privacy_title">Privacy Policy</string>
+    <string name="gdpr_title">Do you want us to show you personalized ads?</string>
+    <string name="gdpr_body">This application uses Appodeals to display ads on your device. By choosing Accept, you agree to share your personal data on the Appodeals Network and agree to Appodeals privacy policy to allow Appodeals and its Partners to provide you with relevant advertisements.</string>
+
+    <string name="about">This streaming application was developed by Ndog Kuwuk Dev. \ N All songs that we provide are fully copyrighted by the song owner. \ N \ nPlease visit the link below to see the Privacy Policy.</string>
+</resources>

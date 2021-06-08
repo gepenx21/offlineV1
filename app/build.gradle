@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        applicationId "com.shankara.djtiktoknew"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def newApkName = applicationId + "-" + variant.versionName + "." + variant.versionCode
+                    outputFileName = new File(outputFileName.replace("app-release", newApkName)
+                    )
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.4.0-beta01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0-beta01'
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0-alpha02'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.media:media:1.4.0-alpha01'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.google.android.material:material:1.4.0-rc01'
+
+    implementation 'com.github.claucookie.miniequalizer:library:1.0.0'
+    implementation 'com.explorestack:consent:1.0.4'
+    implementation 'com.android.volley:volley:1.2.0'
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation("com.github.abenkdh:MaterialDrawer:1.0") {
+        transitive = true
+    }
+
+    implementation 'com.appodeal.ads.sdk:core:2.10.0'
+    implementation 'com.appodeal.ads.sdk.networks:appodeal:2.10.0.2'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:2.10.0.10'
+    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.1'
+    implementation 'com.criteo.publisher:criteo-publisher-sdk:4.4.0'
+}

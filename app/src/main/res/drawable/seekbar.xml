@@ -1,0 +1,31 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@android:id/background">
+        <shape android:shape="line">
+            <stroke
+                android:width="3dp"
+                android:color="@color/text_player" />
+        </shape>
+    </item>
+
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape android:shape="line">
+                <stroke
+                    android:width="3dp"
+                    android:color="#99006064" />
+            </shape>
+        </clip>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="line">
+                <stroke
+                    android:width="3dp"
+                    android:color="@color/colorAccent" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

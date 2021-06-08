@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="6dp"
+    app:contentPadding="4dp"
+    app:cardCornerRadius="6dp"
+    android:layout_margin="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:id="@+id/artwork"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="10dp"
+            >
+            <ImageView
+                android:id="@+id/rv_artwork"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_audio"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                android:padding="5dp"
+                />
+            <es.claucookie.miniequalizerlibrary.EqualizerView
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/equalizer_view"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                custom:foregroundColor="@color/background_toolbar"
+                custom:animDuration="3500"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="Judul lagu"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingEnd="50dp"
+            android:layout_toEndOf="@id/artwork"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_black"
+            />
+
+        <TextView
+            android:id="@+id/tv_artist"
+            android:text="Artis"
+            android:layout_toEndOf="@id/artwork"
+            android:layout_below="@id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_black"/>
+
+
+        <ImageView
+            android:id="@+id/iv_play_active"
+            android:src="@drawable/ic_play_arrow"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/frame_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp">
+        <ImageView
+            android:id="@+id/img_app"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:src="@drawable/iconanak"
+            android:layout_alignParentTop="true"
+            />
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_alignTop="@id/img_app"
+            android:layout_toEndOf="@id/img_app"
+            android:layout_marginStart="25dp"
+            />
+        <TextView
+            android:id="@+id/app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_toEndOf="@id/img_app"
+            android:layout_marginStart="25dp"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/dev_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dev_name"
+            android:layout_toEndOf="@id/img_app"
+            android:layout_marginStart="25dp"
+            android:layout_alignBottom="@id/img_app"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/about_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about"
+        android:textSize="20sp"
+        android:visibility="visible"
+        android:layout_below="@id/frame_app"
+        />
+
+    <TextView
+        android:id="@+id/privacyPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:layout_below="@id/about_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:textSize="16sp"
+        />
+
+    <WebView
+        android:id="@+id/webview_about_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/dismiss"
+        android:layout_below="@id/frame_app"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="close"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
