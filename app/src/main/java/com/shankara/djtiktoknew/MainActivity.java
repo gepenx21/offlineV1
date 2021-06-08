@@ -1,10 +1,8 @@
 package com.shankara.djtiktoknew;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
@@ -23,7 +21,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,16 +30,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appodeal.ads.Appodeal;
-import com.shankara.djtiktoknew.Request.RequestPermissionHandler;
-import com.shankara.djtiktoknew.Adapter.SongAdapter;
-import com.shankara.djtiktoknew.Model.Song;
-import com.shankara.djtiktoknew.Utility.ScrollTextView;
-import com.shankara.djtiktoknew.Utility.Utility;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.shankara.djtiktoknew.Adapter.SongAdapter;
+import com.shankara.djtiktoknew.Model.Song;
+import com.shankara.djtiktoknew.Utility.ScrollTextView;
+import com.shankara.djtiktoknew.Utility.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     private MediaPlayer mediaPlayer;
     private SeekBar seekBar;
     private boolean firstLaunch = true;
-//    private LinearLayout no_conn;
-//    private Button btn_reload;
     Toolbar toolbar;
     Drawer result;
 
@@ -80,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     Animation anim = new AlphaAnimation(0.0f, 1.0f);
     boolean mBlinking = false;
     FragmentManager fm = getSupportFragmentManager();
-    SharedPreferences appIntro = null;
-    private RequestPermissionHandler mRequestPermissionHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +83,8 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         Appodeal.disableLocationPermissionCheck();
         Appodeal.setTesting(true);
         initializeViews();
+        getSongListMain();
         Appodeal.isLoaded(Appodeal.INTERSTITIAL);
-//        showPrivacyPolicy();
-        mRequestPermissionHandler = new RequestPermissionHandler();
-        permissionRequest();
 
         songList = new ArrayList<>();
         recycler.setHasFixedSize(true);
@@ -124,43 +114,13 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         anim.setRepeatCount(Animation.INFINITE);
 
         mediaPlayer.setOnCompletionListener(this);
-//        checkInternetAvailibility();
         handleSeekbar();
         pushPlay();
         pushPrevious();
         pushNext();
         pushShare();
         pushInfo();
-//        reloadBtn();
         initDrawer();
-    }
-
-    private void permissionRequest(){
-        mRequestPermissionHandler.requestPermission(this, new String[] {
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-        }, 123, new com.shankara.djtiktoknew.Request.RequestPermissionHandler.RequestPermissionListener() {
-            @Override
-            public void onSuccess() {
-//                }
-                getSongListMain();
-                //Toast.makeText(MainActivity.this, "request permission success", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailed() {
-                //Toast.makeText(MainActivity.this, "request permission failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mRequestPermissionHandler.onRequestPermissionsResult(requestCode, permissions,
-                grantResults);
     }
 
     public static Intent getIntent(Context context, boolean consent) {
@@ -207,16 +167,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
                         case 4:
                             Intent intents = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.MORE_APP)));
                             startActivity(intents);
-                            break;
-                        case 5:
-                            Intent i = new Intent(MainActivity.this, PrivacyPolicy.class);
-                            i.putExtra("TITLE", "Privacy Policy");
-                            startActivity(i);
-                            break;
-                        case 6:
-                            Intent in = new Intent(MainActivity.this, PrivacyPolicy.class);
-                            in.putExtra("TITLE", "Disclaimer");
-                            startActivity(in);
                             break;
                         default:
                             break;
@@ -320,8 +270,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         tv_time = findViewById(R.id.tv_time);
         iv_share = findViewById(R.id.share);
         iv_info = findViewById(R.id.about);
-//        no_conn = findViewById(R.id.no_conn);
-//        btn_reload = findViewById(R.id.btn_reload);
         Appodeal.isLoaded(Appodeal.BANNER);
     }
 
