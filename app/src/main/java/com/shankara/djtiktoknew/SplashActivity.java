@@ -41,11 +41,10 @@ public class SplashActivity extends Activity {
 
     private void resolveUserConsent() {
         // Note: YOU MUST SPECIFY YOUR APPODEAL SDK KET HERE
-        String appodealAppKey = getResources().getString(R.string.app_id);
         ConsentManager consentManager = ConsentManager.getInstance(this);
         // Requesting Consent info update
         consentManager.requestConsentInfoUpdate(
-                appodealAppKey,
+                Config.appId,
                 new ConsentInfoUpdateListener() {
                     @Override
                     public void onConsentInfoUpdated(Consent consent) {

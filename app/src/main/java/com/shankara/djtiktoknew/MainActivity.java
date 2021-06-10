@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Appodeal.initialize(this,getResources().getString(R.string.app_id), Appodeal.BANNER | Appodeal.INTERSTITIAL);
+        Appodeal.initialize(this,Config.appId, Appodeal.BANNER | Appodeal.INTERSTITIAL);
         Appodeal.disableLocationPermissionCheck();
         Appodeal.setTesting(true);
         initializeViews();
-        Appodeal.isLoaded(Appodeal.INTERSTITIAL);
+        //Appodeal.isLoaded(Appodeal.INTERSTITIAL);
 
         songList = new ArrayList<>();
         recycler.setHasFixedSize(true);
@@ -113,7 +113,21 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         anim.setRepeatMode(Animation.REVERSE);
         anim.setRepeatCount(Animation.INFINITE);
 
-        mediaPlayer.setOnCompletionListener(this);
+        mediaPlayer.setOnCompletionListener(mp -> {
+            if (Config.isPlaying) {
+                Config.isPlaying = false;
+            }
+            if (currentIndex + 1 < songList.size()) {
+                Song next = songList.get(currentIndex + 1);
+                changeSelectedSong(currentIndex + 1);
+                prepareSong(next);
+            } else {
+                Song next = songList.get(0);
+                changeSelectedSong(0);
+                prepareSong(next);
+            }
+            Config.showIntersititial(this, true);
+        });
         handleSeekbar();
         pushPlay();
         pushPrevious();
@@ -121,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         pushShare();
         pushInfo();
         initDrawer();
-        getSongListMain(); //iki penyakite
+        getSongListMain();
     }
 
     public static Intent getIntent(Context context, boolean consent) {
@@ -202,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     private void prepareSong(Song song){
-        Appodeal.show(MainActivity.this, Appodeal.INTERSTITIAL);
+        Config.showIntersititial(this,true);
         Config.isPlaying = true;
         pb_main_loader.setVisibility(View.VISIBLE);
         //tb_title.setVisibility(View.GONE);
@@ -381,61 +395,6 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
         });
     }
 
-//        private void reloadBtn() {
-//        btn_reload.setOnClickListener(v -> {
-//            getSongListMain();
-//            recycler.setVisibility(View.VISIBLE);
-//            no_conn.setVisibility(View.GONE);
-//        });
-//    }
-
-//    public void checkInternetAvailibility()
-//    {
-//        if(isInternetAvailable())
-//        {
-//            getSongListMain();
-//        }
-//        else {
-//            getSongListMain();
-//            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-//            alertDialog.setTitle("Tidak Ada Koneksi Internet");
-//            alertDialog.setMessage("Aplikasi ini membutuhkan koneksi internet untuk periklanan dan kami jamin tidak akan mengurangi kuota internet anda saat memutar lagu. Pastikan HP anda terhubung ke jaringan internet.");
-//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                    (dialog, which) -> {
-//                        dialog.dismiss();
-//                        System.exit(1);
-//                    });
-//            alertDialog.show();
-//        }
-//    }
-
-//        public boolean isInternetAvailable() {
-//        try {
-//            ConnectivityManager connectivityManager
-//                    = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-//            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-//        } catch (Exception e) {
-//
-//            Log.e("isInternetAvailable:",e.toString());
-//            return false;
-//        }
-//    }
-
-    //    private void showPrivacyPolicy() {
-//        appIntro = getSharedPreferences("hasRunBefore_appIntro", 0);  //load the preferences
-//        boolean hasRun = appIntro.getBoolean("hasRun_appIntro", false); //see if it's run before, default no
-//        PrivacyPolicy ppFragment = new PrivacyPolicy();
-//        //If FirstTime
-//        if (!hasRun) {
-//            //code for if this is the first time the application is Running
-//            //Display dialogfragment
-//            ppFragment.setCancelable(true);
-//            ppFragment.show(fm, "Privacy Policy");
-//
-//        }
-//    }
-
     private void pushShare() {
         iv_share.setOnClickListener(v -> {
             Utility.animateButton(iv_share);
@@ -457,8 +416,8 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     private void pushPrevious(){
-
         iv_previous.setOnClickListener(v -> {
+            Config.showIntersititial(this, true);
             firstLaunch = false;
             if(mediaPlayer != null){
                 if(currentIndex - 1 >= 0){
@@ -475,6 +434,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnCom
 
     private void pushNext(){
         iv_next.setOnClickListener(v -> {
+            Config.showIntersititial(this, true);
             firstLaunch = false;
             if(mediaPlayer != null){
                 if(currentIndex + 1 < songList.size()){
